@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
+const logger = require("pino")();
 
 const MODULES_PATH = "modules";
 
@@ -12,7 +13,7 @@ class BotManager {
         this.loadModules();
 
         this.botClient.on('ready', () => {
-            console.log(`Logged in as ${this.botClient.user.tag}!`);
+            logger.info(`Logged in as ${this.botClient.user.tag}!`);
         });
 
         this.botClient.on('message', message => this.handleMessages(message));
@@ -22,12 +23,11 @@ class BotManager {
 
     loadModules() {
         const dir = fs.readdirSync(MODULES_PATH);
-        console.log(dir);
         for (const dirent of dir) {
             let module = require("./" + MODULES_PATH + "/" + dirent);
             if (this.modules[module.prefix] != undefined) {
-                //TODO log class
-                console.log(module.prefix + " is defined twice or more!");
+                logger.fatal(module.prefix + " is defined twice!");
+                process.exit();
             }
             this.modules[module.prefix] = module;
         }
@@ -50,5 +50,3 @@ class BotManager {
 }
 
 let botManager = new BotManager(process.argv[2]);
-
-//botManager.handleMessages({content:"!test 1 und 2"});
