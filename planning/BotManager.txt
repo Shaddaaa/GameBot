@@ -1,0 +1,22 @@
+Legend:
+anyClassName* : this class is part of the discordjs api and will not be explained here
+
+
+------------------------------------------------
+class BotManager
+------------------------------------------------
+botClient : Discord.Client*
+modules : key-value list (e.g. key="ww"; value=new WerewolfGameClass()) 
+    key:String                  //commandprefix for the module
+    value:Module                //object of the module
+------------
+constructor(String token):
+    log in as the bot
+    initialize all modules
+
+event "message":
+    look for prefix stop if it's not there
+    split message into String command, Array args
+    execute command by looking through modules and matching keys with the command, on match executing ALL the respective moduleObject.onCommand with this.botClient, args, message
+    log maybe?
+------------------------------------------------

@@ -1,0 +1,11 @@
+{
+  "name": "gamebot",
+  "version": "1.0.0",
+  "description": "A Discord game bot",
+  "main": "BotManager.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

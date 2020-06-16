@@ -1,0 +1,25 @@
+Legend:
+anyClassName* : this class is part of the discordjs api and will not be explained here
+
+Functionality:
+
+!ww [j]oin allows users to join or create a ww game.
+    Every server can only host one werewolf game, every user can only be part of one werewolf game.
+    Trying to !ww join while in another room should notify the user.
+!ww [l]eave allows users to leave their current room.
+    This does not need to be done in the channel of their current game room.
+    Room should get deleted if there are no users left playing
+The first user who joined and hasn't left yet is known as the leader.
+!ww [c]onfig [option] [args] allows the leader to modify the game specific config.
+    !ww [c]onfig [r]oles [role] [float] sets the percantage of people that should be asigned this role. Once all people have a role, other roles will not be asigned. The order of role assignment is not defined as of now.
+!ww [r]oles returns a list of all roles.
+    !ww [r]oles [role] returns an explanation of what the specified role does.
+
+!ww [s]tart allows the leader to start the game, preventing anyone new to !ww join
+Once a game has been started the bot will do the usual werewolf cycle of:
+Night
+    The bot asks for role specific input by each user in the order that is required by basic werewolf rules.
+    For roles with multiple people that have to know each other (like werewolves) the bot creates a private group where they can discuss and vote via !ww [v]ote or something?
+Day
+    !ww [n]ominate [@user] to nominate a player to be killed
+    !ww [v]ote [@user] to vote for a nominated player

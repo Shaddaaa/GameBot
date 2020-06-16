@@ -1,0 +1,17 @@
+Legend:
+anyClassName* : this class is part of the discordjs api and will not be explained here
+
+
+------------------------------------------------
+class Module
+------------------------------------------------
+prefix: String                      //commandprefix for the module
+name: String                        //!unique! name of the module
+------------
+constructor():
+    initializes the module
+
+onCommand(Discord.Client botClient, [String] args, Message* message):
+    empty function, implemented by the inheriting module
+
+------------------------------------------------
