@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const logger = require("pino")();
-
+global.logger = require("pino")({level:"debug"});
 const MODULES_PATH = "modules";
 
 class BotManager {
@@ -48,5 +47,7 @@ class BotManager {
         }
     }
 }
+
+console.log(this);
 
 let botManager = new BotManager(process.argv[2]);

@@ -5,7 +5,7 @@ class Module {
     }
 
     onCommand(botClient, args, message) {
-        console.log("THIS SHOULD BE OVERWRITTEN BY ANY INHERITING CLASSES");
+        logger.warn("THIS SHOULD BE OVERWRITTEN BY ANY INHERITING CLASSES");
         botClient.channels.cache.get(message.channel.id).send("This module hasn't been implemented yet!");
     }
 }
