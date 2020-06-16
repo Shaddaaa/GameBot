@@ -1,4 +1,4 @@
-const Module = require("../Module.js");
+const Module = require("../../utility/module.js");
 
 class Test extends Module {
     constructor() {

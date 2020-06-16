@@ -5,7 +5,7 @@ anyClassName* : this class is part of the discordjs api and will not be explaine
 ------------------------------------------------
 class Module
 ------------------------------------------------
-prefix: String                      //commandprefix for the module
+prefix: String                      //!unique! commandprefix for the module
 name: String                        //!unique! name of the module
 ------------
 constructor():

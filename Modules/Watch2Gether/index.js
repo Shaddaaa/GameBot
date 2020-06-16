@@ -1,4 +1,4 @@
-const Module = require("../Module.js");
+const Module = require("../../utility/module.js");
 const https = require('https');
 
 class WatchTogether extends Module {

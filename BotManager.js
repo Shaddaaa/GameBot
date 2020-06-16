@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 
+const MODULES_PATH = "modules";
+
 class BotManager {
     constructor(token) {
         this.prefix = "!";
@@ -15,18 +17,18 @@ class BotManager {
 
         this.botClient.on('message', message => this.handleMessages(message));
 
-        
-
         this.botClient.login(token);
     }
 
-    async loadModules() {
-        const path = "Modules";
-        const dir = await fs.promises.opendir(path);
-        for await (const dirent of dir) {
-            if (!dirent.isFile())
-                continue;
-            let module = require("./" + path + "/" + dirent.name);
+    loadModules() {
+        const dir = fs.readdirSync(MODULES_PATH);
+        console.log(dir);
+        for (const dirent of dir) {
+            let module = require("./" + MODULES_PATH + "/" + dirent);
+            if (this.modules[module.prefix] != undefined) {
+                //TODO log class
+                console.log(module.prefix + " is defined twice or more!");
+            }
             this.modules[module.prefix] = module;
         }
     }
