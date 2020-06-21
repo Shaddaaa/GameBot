@@ -1,9 +1,9 @@
-const Module = require("../../utility/module.js");
+const Module = require("../../base/module.js");
 
 class Test2 extends Module {
-    constructor() {
-        super("ttt", "test2");
+    constructor(botManager) {
+        super("ttt", "test2", botManager);
     }
 }
 
-module.exports = new Test2();
+module.exports = Test2;

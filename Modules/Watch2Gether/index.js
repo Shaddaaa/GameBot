@@ -1,11 +1,11 @@
-const Module = require("../../utility/module.js");
+const Module = require("../../base/module.js");
 const https = require('https');
 
 class WatchTogether extends Module {
-    constructor() {
-        super("w2g", "watchtogether");
+    constructor(botManager) {
+        super("w2g", "watchtogether", botManager);
     }
-    onCommand(botClient, args, message) {
+    onCommand(args, message) {
         let options = {
             method: "POST"
         }
@@ -28,4 +28,4 @@ class WatchTogether extends Module {
     }
 }
 
-module.exports = new WatchTogether();
+module.exports = WatchTogether;

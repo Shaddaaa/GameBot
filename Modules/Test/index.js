@@ -1,11 +1,13 @@
-const Module = require("../../utility/module.js");
+const Module = require("../../base/module.js");
+const Lobby = require("../../base/lobby.js");
+
 
 class Test extends Module {
-    constructor() {
-        super("test", "test");
+    constructor(botManager) {
+        super("test", "test", botManager);
     }
 
-    onCommand(botClient, args, message) {
+    onCommand(args, message) {
         console.log(args);
         let s = "";
         for (let arg of args) {
@@ -13,6 +15,10 @@ class Test extends Module {
         }
         botClient.channels.cache.get(message.channel.id).send("<@"+message.author.id+"> in the channel _" + message.channel.name + "_ sent the following arguments: \n" + s);
     }
+
+    createLobby() {
+        this.lobby = new Lobby();
+    }
 }
 
-module.exports = new Test();
+module.exports = Test;

@@ -1,29 +1,37 @@
-const Discord = require("discord.js");
+require("./base/globals.js");
 const fs = require("fs");
-global.logger = require("pino")({level:"debug"});
+
 const MODULES_PATH = "modules";
 
 class BotManager {
     constructor(token) {
         this.prefix = "!";
-        this.botClient = new Discord.Client();
         this.modules = {};
 
         this.loadModules();
 
-        this.botClient.on('ready', () => {
-            logger.info(`Logged in as ${this.botClient.user.tag}!`);
+        botClient.on('ready', () => {
+            logger.info(`Logged in as ${botClient.user.tag}!`);
         });
 
-        this.botClient.on('message', message => this.handleMessages(message));
+        botClient.on('message', message => this.handleMessages(message));
 
-        this.botClient.login(token);
+        botClient.login(token);
+    }
+
+    getModuleOfPlayer(userID) {
+        for (let module in this.modules) {
+            if (module.hasPlayer && module.hasPlayer(userID))
+                return module;
+        }
+        return null;
     }
 
     loadModules() {
         const dir = fs.readdirSync(MODULES_PATH);
         for (const dirent of dir) {
-            let module = require("./" + MODULES_PATH + "/" + dirent);
+            let ModuleClass = require("./" + MODULES_PATH + "/" + dirent);
+            let module = new ModuleClass(this);
             if (this.modules[module.prefix] != undefined) {
                 logger.fatal(module.prefix + " is defined twice!");
                 process.exit();
@@ -42,7 +50,7 @@ class BotManager {
 
         for (let [prefix, module] of Object.entries(this.modules)) {
             if (module.prefix===command) {
-                module.onCommand(this.botClient, args, message);
+                module.onCommand(args, message);
             }
         }
     }

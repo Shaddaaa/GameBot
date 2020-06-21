@@ -1,10 +1,11 @@
 class Module {
-    constructor(prefix, name) {
+    constructor(prefix, name, botManager) {
         this.prefix = prefix;
         this.name = name;
+        this.botManager = botManager;
     }
 
-    onCommand(botClient, args, message) {
+    onCommand(args, message) {
         logger.warn("THIS SHOULD BE OVERWRITTEN BY ANY INHERITING CLASSES");
         botClient.channels.cache.get(message.channel.id).send("This module hasn't been implemented yet!");
     }
