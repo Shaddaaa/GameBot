@@ -13,11 +13,7 @@ class Phase {
 
     leave(userID) {
         this.room.players.removePlayerByID(userID);
-        botClient.channels.cache.get(this.room.channelID).send("<@" + userID + "> left the lobby!");
-    }
-
-    join(userID) {
-        botClient.channels.cache.get(this.room.channelID).send("<@" + userID + "> joined the lobby!");
+        this.room.sendMessage("<@" + userID + "> left the lobby!");
     }
 }
 

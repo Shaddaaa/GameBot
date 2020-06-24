@@ -20,7 +20,8 @@ class BotManager {
     }
 
     getModuleOfPlayer(userID) {
-        for (let module in this.modules) {
+        for (let prefix in this.modules) {
+            let module = this.modules[prefix];
             if (module.hasPlayer && module.hasPlayer(userID))
                 return module;
         }
